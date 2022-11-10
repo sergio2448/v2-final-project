@@ -12,40 +12,43 @@ class MemoryContainer {
     return [...this.items];
   }
 
-  getById() {
-    const item = this.item.find(item => item.id === id);
+  getById(id) {
+    let settedId = parseInt(id);
+    const item = this.items.find((item) => item.id === settedId);
     if (!item) {
       const message = `${this.resource} with id ${id} does not exist in our records`;
       throw new HttpError(HTTP_STATUS.NOT_FOUND, message);
     }
-    return item; 
+    return item;
   }
 
   save(item) {
     const newItem = {
       id: uuid(),
-      ...item
+      ...item,
     };
     this.items.push(newItem);
     return newItem;
   }
 
   updateById(id, item) {
-    const index = this.items.findIndex(item => item.id === id);
+    let settedId = parseInt(id);
+    const index = this.items.findIndex((item) => item.id === settedId);
     if (index < 0) {
       const message = `${this.resource} with id ${id} does not exist in our records`;
       throw new HttpError(HTTP_STATUS.NOT_FOUND, message);
     }
     const updatedItem = {
       id,
-      ...item
+      ...item,
     };
     this.items[index] = updatedItem;
     return updatedItem;
   }
 
   deleteById(id) {
-    const index = this.items.findIndex(item => item.id === id);
+    let settedId = parseInt(id);
+    const index = this.items.findIndex((item) => item.id === settedId);
     if (index < 0) {
       const message = `${this.resource} with id ${id} does not exist in our records`;
       throw new HttpError(HTTP_STATUS.NOT_FOUND, message);

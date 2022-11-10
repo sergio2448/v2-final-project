@@ -1,6 +1,7 @@
 const FileContainer = require("../../containers/file.container");
+const path = require("path");
 
-const route = "../../../db/data/carts.json";
+const route = path.resolve(__dirname, "../../../db/data/carts.file.json");
 
 class CartsFileDao extends FileContainer {
   constructor() {

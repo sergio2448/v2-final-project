@@ -4,8 +4,8 @@ const MongoContainer = require("../../containers/mongo.container");
 const collection = "carts";
 const cartsSchema = new Schema({
   timestamp: { type: Date, default: Date.now },
-  products: [{ type: String }],
-  products1: [{ type: Schema.Types.ObjectId, ref: "products" }],
+  /* products: [{ type: String }], */
+  products: [{ type: Schema.Types.ObjectId, ref: "products" }],
   /* {
     productId: { type: ObjectId },
     code: { type: Number },

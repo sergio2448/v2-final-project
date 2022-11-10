@@ -17,9 +17,10 @@ class FileContainer {
   }
 
   async getById(id) {
+    let settedId = parseInt(id);
     try {
       const content = await this.getAll();
-      const item = content.filter(item => item.id === id);
+      const item = content.filter((item) => item.id === settedId);
       return item;
     } catch (error) {
       console.log(error.message);
@@ -38,9 +39,10 @@ class FileContainer {
   }
 
   async updateById(id, item) {
+    let settedId = parseInt(id);
     try {
       const items = await this.getAll();
-      let indexItem = items.findIndex(item => item.id === id);
+      let indexItem = items.findIndex((item) => item.id === settedId);
       items[indexItem] = item;
       await fs.writeFile(this.route, JSON.stringify(items));
     } catch (error) {
@@ -49,9 +51,10 @@ class FileContainer {
   }
 
   async deleteById(id) {
+    let settedId = parseInt(id);
     try {
       const items = await this.getAll();
-      const filteredItems = items.filter(item => item.id !== id);
+      const filteredItems = items.filter((item) => item.id !== settedId);
       await fs.writeFile(this.route, JSON.stringify(filteredItems))
     } catch (error) {
       console.log(error.message);

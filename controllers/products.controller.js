@@ -5,12 +5,11 @@ const { successResponse } = require("../utils/api.utils");
 const productsDao = new ProductsDao();
 
 class ProductsController {
-
   async getProducts(req, res, next) {
     try {
       const products = await productsDao.getAll();
       const response = successResponse(products);
-      res.status(HTTP_STATUS.OK).json(response)
+      res.status(HTTP_STATUS.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -40,7 +39,7 @@ class ProductsController {
   async updateProduct(req, res, next) {
     const { id } = req.params;
     try {
-      const updateProduct = await productsDao.update(id, req.body);
+      const updateProduct = await productsDao.updateById(id, req.body);
       const response = successResponse(updateProduct);
       res.status(HTTP_STATUS.OK).json(response);
     } catch (error) {
@@ -51,13 +50,13 @@ class ProductsController {
   async deleteProduct(req, res, next) {
     const { id } = req.params;
     try {
-      const deletedProduct = await productsDao.delete(id);
-      const response = successResponse(deletedProduct);
+      const deleteProduct = await productsDao.deleteById(id);
+      const response = successResponse(deleteProduct);
       res.status(HTTP_STATUS.OK).json(response);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
 
-module.exports = ProductsController;
+module.exports = new ProductsController();
