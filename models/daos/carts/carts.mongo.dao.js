@@ -4,18 +4,7 @@ const MongoContainer = require("../../containers/mongo.container");
 const collection = "carts";
 const cartsSchema = new Schema({
   timestamp: { type: Date, default: Date.now },
-  /* products: [{ type: String }], */
   products: [{ type: Schema.Types.ObjectId, ref: "products" }],
-  /* {
-    productId: { type: ObjectId },
-    code: { type: Number },
-    timestamp: { type: Date, default: Date.now },
-    name: { type: String },
-    description: { type: String },
-    imageUrl: { type: String },
-    price: { type: Number },
-    stock: { type: Number }
-  } */
 });
 
 class CartsMongoDao extends MongoContainer {
@@ -25,10 +14,10 @@ class CartsMongoDao extends MongoContainer {
 
   async getProductsCart(cartId) {
     try {
-      const products = this.model.getById(cartId).products.map(prod => {
-        return prod;
-      })
-      return products;
+      const productsCart = this.model
+        .find({ _id: cartId })
+        .populate("products");
+      return productsCart;
     } catch (error) {
       console.log(error.message);
     }
@@ -36,13 +25,14 @@ class CartsMongoDao extends MongoContainer {
 
   async addProductToCart(cartId, productId) {
     try {
-      this.model.updateOne({ _id: cartId }, {
+      const updatedProductsToCart = await this.model.findByIdAndUpdate(cartId, {
         $push: {
-          products: [productId]
-        }
-      })
+          products: productId.products,
+        },
+      });
+      return updatedProductsToCart;
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   }
 
@@ -50,12 +40,18 @@ class CartsMongoDao extends MongoContainer {
     try {
       const cart = await this.getById(cartId);
       if (cart) {
-        let filteredProductsCart = await cart.products.filter(prod => prod.id !== productId);
-        cart.products = filteredProductsCart;
-        this.updateById(cartId, cart)
+        let filteredProductsCart = await cart.products.filter(
+          (prod) => prod._id.toString() !== productId
+        );
+        const updatedProductsToCart = await cart.updateOne({
+          $set: {
+            products: filteredProductsCart,
+          },
+        });
+        return updatedProductsToCart;
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   }
 }

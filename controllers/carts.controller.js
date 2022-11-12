@@ -50,10 +50,7 @@ class CartsController {
   async saveProductToCart(req, res, next) {
     const { id } = req.params;
     try {
-      const addNewProductToCart = await cartsDao.addProductsToCart(
-        id,
-        req.body
-      );
+      const addNewProductToCart = await cartsDao.addProductToCart(id, req.body);
       const response = successResponse(addNewProductToCart);
       res.status(HTTP_STATUS.CREATED).json(response);
     } catch (error) {
