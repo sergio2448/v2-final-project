@@ -19,13 +19,10 @@ class CartsFirebaseDao extends FirebaseContainer {
 
   async addProductToCart(cartId, product) {
     try {
-      cart = await this.getById(cartId);
-      await cart.products.push(product);
-      if (cart) {
-        const data = await this.collection
-          .doc(id)
-          .update({ products: cart.products });
-      }
+      const cart = await this.getById(cartId);
+      await cart.products.push(product.id);
+      this.updateById(cartId, cart);
+      return cart;
     } catch (error) {
       console.log(error.message);
     }
@@ -35,10 +32,10 @@ class CartsFirebaseDao extends FirebaseContainer {
     try {
       const cart = await this.getById(cartId);
       if (cart) {
-        let filteredProductsCart = await cart.products.filter(
-          (product) => product.id !== productId
+        const filteredProductsCart = await cart.products.filter(
+          (product) => product !== productId
         );
-        cart.product = filteredProductsCart;
+        cart.products = filteredProductsCart;
         this.updateById(cartId, cart);
       }
     } catch (error) {

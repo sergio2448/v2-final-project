@@ -11,7 +11,7 @@ class CartsFileDao extends FileContainer {
   async getProductsCart(cartId) {
     try {
       const cart = await this.getById(cartId);
-      const products = cart[0].product;
+      const products = cart[0].products;
       return products;
     } catch (error) {
       console.log(error.message);
@@ -22,25 +22,26 @@ class CartsFileDao extends FileContainer {
     try {
       const cart = await this.getById(cartId);
       if (cart) {
-        cart[0].product.push(product);
+        await cart[0].products.push(product.id);
+        await this.updateById(cartId, cart[0]);
         return cart;
       }
-      await this.updateById(cartId, cart);
     } catch (error) {
       console.log(error.message);
     }
   }
 
   async deleteProductById(cartId, productId) {
+    let settedId = parseInt(productId);
     try {
       const cart = await this.getById(cartId);
       if (cart) {
-        let filteredProductsCart = cart.product.filter(
-          (prod) => prod.id !== productId
+        let filteredProductsCart = cart[0].products.filter(
+          (prod) => prod !== settedId
         );
-        cart.product = filteredProductsCart;
+        cart[0].products = filteredProductsCart;
+        await this.updateById(cartId, cart[0]);
       }
-      await this.updateById(cartId, cart);
     } catch (error) {
       console.log(error.message);
     }

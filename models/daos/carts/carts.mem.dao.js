@@ -7,39 +7,40 @@ class CartsMemDao extends MemContainer {
     super(resource);
   }
 
-  getProductsCart(cartId) {
+  async getProductsCart(cartId) {
     try {
-      const cart = this.getById(cartId);
-      const products = cart[0].product;
+      const cart = await this.getById(cartId);
+      const products = cart[0].products;
       return products;
     } catch (error) {
       console.log(error.message);
     }
   }
 
-  addProductToCart(cartId, product) {
+  async addProductToCart(cartId, product) {
     try {
-      const cart = this.getById(cartId);
+      const cart = await this.getById(cartId);
       if (cart) {
-        cart[0].product.push(product);
+        cart[0].products.push(product.id);
+        await this.updateById(cartId, cart[0]);
         return cart;
       }
-      this.updateById(cartId, cart);
     } catch (error) {
       console.log(error.message);
     }
   }
 
-  deleteProductById(cartId, productId) {
+  async deleteProductById(cartId, productId) {
+    let settedId = parseInt(productId);
     try {
-      const cart = this.getById(cartId);
+      const cart = await this.getById(cartId);
       if (cart) {
-        let filteredProductsCart = cart.product.filter(
-          (prod) => prod.id !== productId
+        let filteredProductsCart = cart[0].products.filter(
+          (prod) => prod !== settedId
         );
-        cart.product = filteredProductsCart;
+        cart[0].products = filteredProductsCart;
+        await this.updateById(cartId, cart[0]);
       }
-      this.updateById(cartId, cart);
     } catch (error) {
       console.log(error.message);
     }
