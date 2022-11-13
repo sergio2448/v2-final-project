@@ -29,3 +29,8 @@ FIREBASE_CLIENT_CERT_URL=YOUR_FIREBASE_CLIENT_CERT_URL
 ```
 
 ### Installation 🔧
+_Use the package manager npm to install. (Remember to use this command inside of root file)_
+```
+npm install 
+```
+
