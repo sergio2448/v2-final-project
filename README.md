@@ -4,7 +4,7 @@ _The project consists of a REST API developed under the design patterns __MVC__ 
 There are four sources of information: _Mongodb_, _Firebase_, _Memory_ and _FileSystem_, the choice of some of them is done in the `.env` file as will be shown later._
 
 ## Starting 🚀
-_These instructions will allow you to get a working copy of the project on your local machine for development and testing purposes._
+_These instructions will allow you to start the project on your local machine for development and testing purposes._
 
 ### Pre-requirements 📋
 _For run local you will need to:_
