@@ -4,8 +4,7 @@ _The project consists of a REST API developed under the design patterns __MVC__ 
 There are four sources of information: _Mongodb_, _Firebase_, _Memory_ and _FileSystem_, the choice of some of them is done in the `.env` file as will be shown later._
 
 ### Routes :arrows_counterclockwise:
-![Routes](https://user-images.githubusercontent.com/84557725/201752310-7f60df5b-3da4-41e1-b252-8b5d993f50e3.png)
-
+![Routes](https://user-images.githubusercontent.com/84557725/201790809-87c01359-9479-472f-a6b9-4252920b4099.png)
 
 ## Starting 🚀
 _These instructions will allow you to start the project._
@@ -33,8 +32,43 @@ FIREBASE_CLIENT_CERT_URL=YOUR_FIREBASE_CLIENT_CERT_URL
 ```
 
 ### Installation 🔧
-_Use the package manager npm to install. (Remember to use this command inside of root file)_
+1. _Use the package manager npm to install. (Remember to use this command inside of root file)_
 ```
 npm install 
 ```
-
+2. _Raise the server_
+```
+npm start
+```
+3. _Example to add a product_
+```
+  http://localhost:8080/api/products
+```
+```js
+{
+    "code": 278,
+    "name": "Guitar",
+    "description": "Aria - 9500 Acoustic Guitar",
+    "price": 345,
+    "imageUrl": "https://www.cottonguitars.com/wp-content/uploads/2020/07/20200701_201245-scaled.jpg",
+    "stock": 10
+}
+```
+4. _Example to create a cart_
+```
+  http://localhost:8080/api/carts
+```
+```js
+{
+    "products": []
+}
+```
+5. _Example to add product to cart_
+```
+  http://localhost:8080/api/carts/:id_cart/products
+```
+```js
+{
+    "id": <id_prod>
+}
+```
