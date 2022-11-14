@@ -3,6 +3,10 @@
 _The project consists of a REST API developed under the design patterns __MVC__ and __DAOs__; it develops routes to read, create, update and delete products and carts, additionally you can display, add and delete the products of a particular cart. \
 There are four sources of information: _Mongodb_, _Firebase_, _Memory_ and _FileSystem_, the choice of some of them is done in the `.env` file as will be shown later._
 
+### Routes :arrows_counterclockwise:
+![Routes](https://user-images.githubusercontent.com/84557725/201752310-7f60df5b-3da4-41e1-b252-8b5d993f50e3.png)
+
+
 ## Starting 🚀
 _These instructions will allow you to start the project on your local machine for development and testing purposes._
 
