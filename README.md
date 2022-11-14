@@ -8,7 +8,7 @@ There are four sources of information: _Mongodb_, _Firebase_, _Memory_ and _File
 
 
 ## Starting 🚀
-_These instructions will allow you to start the project on your local machine for development and testing purposes._
+_These instructions will allow you to start the project._
 
 ### Pre-requirements 📋
 _For run local you will need to:_
