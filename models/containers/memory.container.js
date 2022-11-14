@@ -25,6 +25,7 @@ class MemoryContainer {
   save(item) {
     const newItem = {
       id: uuid(),
+      timestamp: Date.now(),
       ...item,
     };
     this.items.push(newItem);
