@@ -72,3 +72,9 @@ npm start
     "id": <id_prod>
 }
 ```
+### Built with 🛠️
+* [dotenv](https://www.npmjs.com/package/dotenv)
+* [express](https://expressjs.com/en/4x/api.html)
+* [firebase-admin](https://www.npmjs.com/package/firebase-admin)
+* [mongoose](https://mongoosejs.com/docs/api.html)
+* [uuid](https://www.npmjs.com/package/uuid)
