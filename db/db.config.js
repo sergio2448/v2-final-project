@@ -7,7 +7,9 @@ module.exports = {
     products: "./data/products.json",
   },
   mongodb: {
-    uri: `mongodb+srv://${envConfig.MONGO_DB_USER}:${envConfig.DB_PASSWORD}@coderhouse.2ihrzcb.mongodb.net/?retryWrites=true&w=majority`,
+    uri:
+      process.env.MONGO_URL ||
+      `mongodb+srv://${envConfig.MONGO_DB_USER}:${envConfig.DB_PASSWORD}@coderhouse.2ihrzcb.mongodb.net/?retryWrites=true&w=majority`,
   },
   firebase: {
     credentials: {
